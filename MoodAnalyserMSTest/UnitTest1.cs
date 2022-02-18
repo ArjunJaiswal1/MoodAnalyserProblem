@@ -43,7 +43,24 @@ namespace TestProject1
             Assert.AreEqual(expected, mood);
 
         }
+        //Method to test happy message(UC2-TC2.1)
+        [TestCategory("Null Exception")]
+        
+        public void GivenNullMessageException()
+        {
+           
+            ///Arange
+            string msg = null;
+            string expected = "happy";
+            
+            MoodStatus moodAnalyse = new MoodStatus(msg);
+            //Act
+            string mood = moodAnalyse.AnalyseMood();
+            ///Asert
+            Assert.AreEqual(expected, mood);
+        }
     }
 }
+
     
 
