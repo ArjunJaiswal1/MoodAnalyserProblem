@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace MoodAnalyserProblem
 {    /// <summary>
      /// In case of NULL or Empty Mood throwing Custom Exception MoodAnalysisException(UC3)
