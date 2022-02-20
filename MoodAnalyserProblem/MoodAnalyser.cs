@@ -1,34 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace MoodAnalyzerProblem
+namespace MoodAnalyserProblem
 {
-    public class MoodStatus
+    /// <summary>
+    /// Class to check a message, ability to analyse and respond happy or sad Mood
+    /// </summary>
+    public class MoodAnalyse
     {
-        private string message;
-
-        public MoodStatus(string message)
+        //Declaring varibale(Refactor)
+        public string message;
+        //Constructor to initialize message(Refactor) 
+        public MoodAnalyse(string message)
         {
             this.message = message;
         }
-
-        //<summary>
-        // Parameterized Constructor
-        // </summary>
-        // <returns></returns>
-        public string AnalyseMood()
+        //Method to analyse the mood from  the given message(UC1)
+        public string AnalyzeMood()
         {
-            if (this.message.Contains("Sad"))
+            //Handling exception if user provide null value(UC3)
+            
+            try
             {
-                return "SAD";
+              
+                //In case of null or empty mood throw custom exception MoodAnalysisException(UC3)
+                if (this.message.Equals(null))
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionTypes.NULL_MOOD_EXCEPTION, "Message should not be null");
+                else if (this.message.Equals(string.Empty))
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionTypes.EMPTY_MOOD_EXCEPTION, "Message should not be empty");
+                else if (message.ToLower().Contains("sad"))
+                    return "sad";
+                else
+                    return "happy";
+                
             }
-            else
+            catch (NullReferenceException)
+           
             {
-                return "HAPPY";
+                return "happy";
             }
+
+
         }
     }
 }
