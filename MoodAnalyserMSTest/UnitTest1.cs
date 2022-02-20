@@ -106,5 +106,66 @@ namespace MoodAnalyserProblem
                 Assert.AreEqual(expected, e.Message);
             }
         }
+        //Method to test so moodanalyser class return moodanalyser objects(UC4-TC4.1)
+        [TestCategory("Reflection")]
+        
+        [DataRow("MoodAnalyserProblems.Customer", "Customer")]
+        [DataRow("MoodAnalyserProblems.MoodAnalyser", "MoodAnalyser")]
+        public void ReturnDefaultConstructor(string className, string constructor)
+        {
+            MoodAnalyse expected = new MoodAnalyse();
+            object obj = null;
+            try
+            {
+                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                obj = factory.CreateMoodAnalyserObject(className, constructor);
+
+            }
+            catch (MoodAnalysisException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            expected.Equals(obj);
+        }
+        //Method to test so mood analyser with diff class to return no class found(UC4-TC4.2)
+        [TestCategory("Reflection")]
+        [TestMethod]
+        [DataRow("MoodAnalyserProblems.Linklist", "Linklist", "The Given Class IS Not Found")]
+        [DataRow("MoodAnalyserProblems.Stack", "Stack", "The Given Class IS Not Found")]
+        public void ReturnDefaultConstructorNoClassFound(string className, string constructor, string expected)
+        {
+            object obj = null;
+            try
+            {
+                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                obj = factory.CreateMoodAnalyserObject(className, constructor);
+
+            }
+            catch (MoodAnalysisException actual)
+            {
+                Assert.AreEqual(expected, actual.Message);
+            }
+        }
+        //Method to test so mood analyser class return  contructor not found(UC4-TC4.3)
+        [TestCategory("Reflection")]
+        [TestMethod]
+        [DataRow("MoodAnalyserProblems.MoodAnalyser", "Linklist", "The Given Constructor Is Not Found")]
+        [DataRow("MoodAnalyserProblems.MoodAnalyser", "Customer", "The Given Constructor Is Not Found")]
+        public void ReturnDefaultConstructorNoConstructorFound(string className, string constructor, string expected)
+        {
+            object obj = null;
+            try
+            {
+                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                obj = factory.CreateMoodAnalyserObject(className, constructor);
+
+            }
+            catch (MoodAnalysisException actual)
+            {
+                Assert.AreEqual(expected, actual.Message);
+            }
+        }
+    }
+} 
     }
 }
