@@ -20,7 +20,10 @@ namespace MoodAnalyserProblem
             EMPTY_MOOD_EXCEPTION,
             CLASS_NOT_FOUND,
             CONSTRUCTOR_NOT_FOUND,
-            METHOD_NOT_FOUND
+            
+            METHOD_NOT_FOUND,
+            EMPTY_MESSAGE,
+            NO_SUCH_FIELD
 
 
         }

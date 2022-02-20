@@ -189,5 +189,36 @@ namespace MoodAnalyserProblem
                 Assert.AreEqual(expected, actual.Message);
             }
         }
+        //Method to set the field value and invoke method using reflection(UC7-TC7.1)
+        [TestCategory("Reflection")]
+        [TestMethod]
+        [DataRow("happy", "happy", "message")]
+        [DataRow("sad", "sad", "message")]
+        public void ReflectionReturnSetField(string value, string expected, string message)
+        {
+            string actual = reflector.SetField(value, message);
+            Assert.AreEqual(expected, actual);
+        }
+
+        //Method to set the field value with invalid field to throw exception(UC7-TC7.2&7.3)
+        [TestCategory("Reflection")]
+        [TestMethod]
+        [DataRow("happy", "Field is not found", "msg")]
+        [DataRow("sad", "Field is not found", "newmsg")]
+        [DataRow("", "Message should not be null", "message")]
+        [DataRow(null, "Message should not be null", "message")]
+        public void ReflectionReturnInvalidField(string value, string expected, string message)
+        {
+            try
+            {
+                string actual = reflector.SetField(value, message);
+            }
+            catch (MoodAnalysisException actual)
+            {
+                Assert.AreEqual(expected, actual.Message);
+            }
+
+        }
     }
 }
+    
